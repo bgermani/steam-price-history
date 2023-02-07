@@ -7,7 +7,6 @@ Simple Java application that schedules a daily pull of Steam game prices specifi
 
 ## Next steps
 
-Polish the application while adding new features such as:
 - Elasticsearch indexing
 - Reformulate the database structure using a PriceToGame table in order to have better data quality
-- Create endpoints to be used with a frontend
+- Endpoints to be used with a frontend
