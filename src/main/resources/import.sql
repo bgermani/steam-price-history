@@ -1,0 +1,1 @@
+insert into game values(1, '2023-01-29 11:25:15.453', 990080, 'The First Game', 5.30);

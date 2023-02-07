@@ -1,0 +1,10 @@
+version: '3'
+services:
+
+  mysql:
+    image: "mysql:8.0.30"
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_USER: "test"
+      MYSQL_PASSWORD: "test"
+    network_mode: "host"
