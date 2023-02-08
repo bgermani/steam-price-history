@@ -55,25 +55,24 @@ public class GameController {
 
     public static Game getPriceDetails(String gameId) throws URISyntaxException, IOException, InterruptedException {
 
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(String.format("https://store.steampowered.com/api/appdetails?appids=%s", gameId)))
-                    .GET()
-                    .build();
-            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(String.format("https://store.steampowered.com/api/appdetails?appids=%s", gameId)))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-            JsonObject object = JsonParser.parseString(response.body().toString()).getAsJsonObject();
-            String name = object.getAsJsonObject(gameId).getAsJsonObject("data").getAsJsonPrimitive("name")
-                    .getAsString();
-            String price = object.getAsJsonObject(gameId).getAsJsonObject("data").getAsJsonObject("price_overview")
-                    .getAsJsonPrimitive("final_formatted").getAsString();
+        JsonObject game = JsonParser.parseString(response.body().toString()).getAsJsonObject().getAsJsonObject(gameId)
+                .getAsJsonObject("data");
+        String name = game.getAsJsonPrimitive("name").getAsString();
+        String price = game.getAsJsonObject("price_overview").getAsJsonPrimitive("final_formatted").getAsString();
 
-            Game newGame = new Game();
-            newGame.setGameId(Long.parseLong(gameId));
-            newGame.setName(name);
-            newGame.setPrice(price);
-            newGame.setDate(new Date());
+        Game newGame = new Game();
+        newGame.setGameId(Long.parseLong(gameId));
+        newGame.setName(name);
+        newGame.setPrice(price);
+        newGame.setDate(new Date());
 
-            return newGame;
+        return newGame;
     }
 }
