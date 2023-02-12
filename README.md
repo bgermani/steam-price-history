@@ -11,6 +11,10 @@ GET /gamelist - get all price history for all games inserted
 ```
 
 ```
+GET /gamelist/update - manually trigger a price data update
+```
+
+```
 GET /game/{gameId} -  get full Steam info for gameId
 
 ```

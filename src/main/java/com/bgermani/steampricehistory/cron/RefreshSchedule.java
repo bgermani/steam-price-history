@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RefreshSchedule {
     private final GameRepository gameRepository;
 
-    RefreshSchedule(GameRepository gameRepository) {
+    public RefreshSchedule(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
 

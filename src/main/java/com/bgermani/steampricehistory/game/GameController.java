@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.bgermani.steampricehistory.cron.RefreshSchedule;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -32,6 +33,12 @@ public class GameController {
     @GetMapping("/gamelist")
     List<Game> all() {
         return gameRepository.findAll();
+    }
+
+    @GetMapping("/gamelist/update")
+    String refreshAll() throws URISyntaxException, IOException, InterruptedException {
+        new RefreshSchedule(gameRepository).refreshAllGames();
+        return "Updating existing games list.";
     }
 
     @GetMapping("/game/{steamId}")
