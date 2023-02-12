@@ -1,10 +1,43 @@
 version: '3'
 services:
 
-  mysql:
+  db:
     image: "mysql:8.0.30"
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "admin"
-      MYSQL_USER: "test"
-      MYSQL_PASSWORD: "test"
-    network_mode: "host"
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=sphdb
+    ports:
+      - 3306:3306
+    networks:
+      - backend-network
+
+  steam-price-history:
+    container_name: steam-price-history
+    image: steam-price-history:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/sphdb?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: test
+      SPRING_DATASOURCE_PASSWORD: test
+    networks:
+      - backend-network
+    depends_on:
+      - db
+    links:
+      - db:db
+
+networks:
+  backend-network:
+    driver: bridge
+volumes:
+  db_data:
+    driver: local
