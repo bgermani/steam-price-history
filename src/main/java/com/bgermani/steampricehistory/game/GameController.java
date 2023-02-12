@@ -10,7 +10,6 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +35,10 @@ public class GameController {
     }
 
     @GetMapping("/game/{steamId}")
-    Game findOne(@PathVariable("steamId") String steamId) {
+    List<Game> findOne(@PathVariable("steamId") String steamId) {
         try {
-            Optional<Game> opt = gameRepository.findById(Long.parseLong(steamId));
-            return opt.get();
+            List<Game> games = gameRepository.findByGameId(steamId);
+            return games;
         } catch (NoSuchElementException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Game ID %s not found", steamId));
         }

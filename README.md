@@ -4,9 +4,25 @@
  
 Simple Java application that schedules a daily pull of Steam game prices specified by the user and keeps a history of them.
 
+## Endpoints
 
-## Next steps
+```
+GET /gamelist - get all price history for all games inserted
+```
 
-- Elasticsearch indexing
-- Reformulate the database structure using a PriceToGame table in order to have better data quality
-- Endpoints to be used with a frontend
+```
+GET /game/{gameId} -  get full Steam info for gameId
+
+```
+
+```
+POST /game/{gameId} - insert gameId to db
+
+```
+
+## To-do
+
+- Implement Redis
+- Implement ES
+- Reformulate DB structure using a PriceToGame table for better data quality
+- Endpoints to be used with frontend
