@@ -11,8 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.bgermani.steampricehistory.game.Game;
-import com.bgermani.steampricehistory.game.GameController;
 import com.bgermani.steampricehistory.game.GameRepository;
+import com.bgermani.steampricehistory.game.GameService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,7 +41,7 @@ public class RefreshSchedule {
             log.info("Saving game ID " + String.valueOf(gameId));
             usedGameIds.add(gameId);
 
-            Game game = GameController.getPriceDetails(String.valueOf(gameId));
+            Game game = GameService.getPriceDetails(String.valueOf(gameId));
             game.setDate(new Date());
             gameRepository.save(game);
         }
