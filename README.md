@@ -1,13 +1,13 @@
 # Steam price history
 
 ## What it is
- 
-Simple Java application that schedules a daily pull of Steam game prices specified by the user and keeps a history of them.
+
+Pulls Steam game prices specified by the user daily and keeps a history of them.
 
 ## Endpoints
 
 ```
-GET /gamelist - get all price history for all games inserted
+GET /gamelist - get all price history for all games
 ```
 
 ```
@@ -15,11 +15,9 @@ GET /gamelist/update - manually trigger a price data update
 ```
 
 ```
-GET /game/{gameId} -  get full Steam info for gameId
-
+GET /game/{gameId} -  get all price data for specified gameId
 ```
 
 ```
-POST /game/{gameId} - insert gameId to db
-
+POST /game/{gameId} - insert gameId to database
 ```
