@@ -23,10 +23,3 @@ GET /game/{gameId} -  get full Steam info for gameId
 POST /game/{gameId} - insert gameId to db
 
 ```
-
-## To-do
-
-- Implement Redis
-- Implement ES
-- Reformulate DB structure using a PriceToGame table for better data quality
-- Endpoints to be used with frontend
