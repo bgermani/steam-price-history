@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class RefreshSchedule {
-    private final GameRepository gameRepository;
 
-    public RefreshSchedule(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    @Autowired
+    private GameRepository gameRepository;
 
     @Scheduled(cron = "0 0 20 * * *")
     public void refreshAllGames() throws URISyntaxException, IOException, InterruptedException {
